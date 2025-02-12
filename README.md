@@ -2,7 +2,6 @@
 
 Ein einfacher, terminalbasierter Chat-Raum, der lokal läuft und es mehreren Clients ermöglicht, sich mit einem Server zu verbinden und Nachrichten in Echtzeit auszutauschen.
 
-![image](https://github.com/user-attachments/assets/54625d5a-7d65-417e-b269-1ce1e558034d)
 
 ## Features
 - Server-Client-Architektur
