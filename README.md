@@ -20,10 +20,9 @@ Ein einfacher, terminalbasierter Chat-Raum, der lokal läuft und es mehreren Cli
 ### 1️⃣ Code kompilieren
 ```bash
 # Server kompilieren
-g++ -o server server.cpp -pthread
-
+Makefile für den server.cpp
 # Client kompilieren
-g++ -o client client.cpp -pthread
+Makefile für client.cpp
 ```
 
 ### 2️⃣ Server starten
