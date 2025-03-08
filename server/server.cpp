@@ -62,19 +62,18 @@ void handle_client(int client_socket) {
 
 int main() {
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
-    if (server_socket == -1) {
-        std::cerr << "Error creating socket." << std::endl;
-        return EXIT_FAILURE;
-    }
-
-    // Option für direktes Wiederverwenden des Ports setzen
-    int opt = 1;
-    setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
-
+    int opt = 1; // option for direct usage of port    
     sockaddr_in server_addr = {};
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(8081);  // TCP Port 8081
+    setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
+
+    if (server_socket == -1) {
+        std::cerr << "Error creating socket." << std::endl;
+        return EXIT_FAILURE;
+    }
 
     if (bind(server_socket, (sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
         std::cerr << "Error binding socket.\n";
@@ -88,7 +87,7 @@ int main() {
 
     std::cout << "Server is listening on port " << ntohs(server_addr.sin_port) << "...\n";
 
-  //Starte einen neuen Thread für Server-Eingabe
+    //  Starte einen neuen Thread für Server-Eingabe
     std::thread([]() {
         std::string server_message;
         while (true) {

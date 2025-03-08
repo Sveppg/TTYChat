@@ -6,6 +6,9 @@
 
 #define BUF_SIZE 1024
 
+/*
+*   Recieve Messages from Broadcasting server to all clients
+*/
 void receive_messages(int socket) {
     char buffer[BUF_SIZE];
     while (true) {
@@ -18,16 +21,16 @@ void receive_messages(int socket) {
 }
 
 int main() {
-    int client_socket = socket(AF_INET, SOCK_STREAM, 0);
-    if (client_socket == -1) {
-        std::cerr << "Error creating socket.\n";
-        return -1;
-    }
-
+    int client_socket = socket(AF_INET, SOCK_STREAM, 0);  
     sockaddr_in server_addr = {};
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(8081);
     server_addr.sin_addr.s_addr = INADDR_ANY;
+    
+    if (client_socket == -1) {
+        std::cerr << "Error creating socket.\n";
+        return -1;
+    }
 
     if (connect(client_socket, (sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
         std::this_thread::sleep_for(std::chrono::seconds(2));
