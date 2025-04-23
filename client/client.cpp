@@ -1,6 +1,5 @@
 #include <iostream>
 #include <thread>
-#include <cstring>
 #include <netinet/in.h>
 #include <unistd.h>
 
@@ -40,7 +39,9 @@ int main() {
         }
     }
 
-    std::cout << "Connected to the server.\n";
+    if(connect(client_socket, (sockaddr*) & server_addr, sizeof(server_addr) == 0)){
+        std::cout << "Connected to the server.\n";
+    }
 
     // Starte den Empfänger-Thread
     std::thread(receive_messages, client_socket).detach();

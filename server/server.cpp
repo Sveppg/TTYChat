@@ -4,7 +4,6 @@
 #include <mutex>
 #include <netinet/in.h>
 #include <unistd.h>
-#include <cstring>
 
 #define BUF_SIZE 1024
 
@@ -26,7 +25,7 @@ void send_to_all_clients(const std::string& message) {
 *   Handle Client connection and messages -> mutex lock & unlock
 */
 
-void handle_client(int client_socket) {
+void handle_client(int client_socket){
     char buffer[BUF_SIZE];
 
     while (true) {
@@ -85,8 +84,10 @@ int main() {
         return -1;
     }
 
-    std::cout << "Server is listening on port " << ntohs(server_addr.sin_port) << "...\n";
-
+    if(server_socket == 0){
+        std::cout << "Server is listening on port " << ntohs(server_addr.sin_port) << "...\n";
+    }
+    
     //  Starte einen neuen Thread für Server-Eingabe
     std::thread([]() {
         std::string server_message;
